@@ -1,4 +1,5 @@
 from aiogram import types
+from aiogram.enums.chat_type import ChatType
 from aiogram.filters import BaseFilter
 
 
@@ -10,8 +11,12 @@ class ChatTypeFilter(BaseFilter):
 
 
 class PrivateTypeFilter(ChatTypeFilter):
-    chat_types: list[str] = ['private']
+    chat_types: list[str] = [ChatType.PRIVATE]
 
 
 class GroupTypeFilter(ChatTypeFilter):
-    chat_types: list[str] = ['group', 'supergroup']
+    chat_types: list[str] = [ChatType.GROUP, ChatType.SUPERGROUP]
+
+
+class ChannelTypeFilter(ChatTypeFilter):
+    chat_types: list[str] = [ChatType.CHANNEL]
