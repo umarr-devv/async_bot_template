@@ -14,6 +14,8 @@ class BotConfig(BaseModel):
 class DBConfig(BaseModel):
     database: str
     host: str
+    user: str
+    password: str
 
 
 class LoggingConfig(BaseModel):
