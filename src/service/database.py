@@ -3,18 +3,20 @@ from sqlalchemy.orm import DeclarativeBase
 
 from src.config import Config
 
+URL_TEMPLATE = 'postgresql+asyncpg://{}:{}@{}/{}'
+
 
 class Base(DeclarativeBase):
     __abstract__ = True
 
 
 class DataBase:
-    url = "postgresql+asyncpg://{}:{}@{}/{}"
 
     def __init__(self, config: Config):
+        self.url = URL_TEMPLATE.format(config.db.user, config.db.password,
+                                       config.db.host, config.db.database)
         self.engine = create_async_engine(
-            url=self.url.format(config.db.user, config.db.password,
-                                config.db.host, config.db.database)
+            url=self.url
         )
         self.session_factory = async_sessionmaker(
             bind=self.engine,
