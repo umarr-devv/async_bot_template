@@ -1,6 +1,6 @@
 from aiogram import Router
 
-from filters.chat_type import ChannelTypeFilter
+from src.filters.chat_type import ChannelTypeFilter
 
 router = Router()
 

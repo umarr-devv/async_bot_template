@@ -1,6 +1,6 @@
 from aiogram import Router
 
-from filters.chat import AdminFilter
+from src.filters.chat import AdminFilter
 
 router = Router()
 

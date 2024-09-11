@@ -1,6 +1,6 @@
 from aiogram import Router
 
-from filters.chat_type import GroupTypeFilter
+from src.filters.chat_type import GroupTypeFilter
 
 router = Router()
 
