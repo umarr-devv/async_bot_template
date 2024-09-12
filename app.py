@@ -24,7 +24,7 @@ async def main():
     dp.include_router(router)
 
     try:
-        await dp.start_polling(bot, database=database, config=config)
+        await dp.start_polling(bot, sessions=database.sessions, config=config)
     finally:
         await bot.session.close()
         await dp.storage.close()
