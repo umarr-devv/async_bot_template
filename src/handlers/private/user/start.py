@@ -1,9 +1,6 @@
 from aiogram import types, Router
 from aiogram.filters import CommandStart, CommandObject
 
-from src.models.crud import create_user
-from src.service.database import DataBase
-
 router = Router()
 
 
