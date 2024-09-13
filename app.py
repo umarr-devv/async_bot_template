@@ -11,7 +11,9 @@ from src.service.database import DataBase
 from src.utils.logs import set_logging
 from src.models import Base
 
-config = Config.create(config_file='local-config.yml')
+CONFIG_FILE = 'local-config.yml'
+
+config = Config.create(config_file=CONFIG_FILE)
 dp = Dispatcher(storage=MemoryStorage())
 database = DataBase(config=config)
 bot = Bot(token=config.bot.token,
