@@ -8,6 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from src.config import Config
 from src.handlers import router
 from src.service.database import DataBase
+from src.utils.commands import set_commands
 from src.utils.logs import set_logging
 from src.models import Base
 
@@ -22,6 +23,7 @@ bot = Bot(token=config.bot.token,
 
 async def main():
     set_logging(config=config)
+    await set_commands(bot=bot)
 
     dp.include_router(router)
 
