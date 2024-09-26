@@ -16,14 +16,14 @@ CONFIG_FILE = 'local-config.yml'
 
 config = Config.create(config_file=CONFIG_FILE)
 dp = Dispatcher(storage=MemoryStorage())
-database = DataBase(config=config)
+database = DataBase(config)
 bot = Bot(token=config.bot.token,
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 
 async def main():
-    set_logging(config=config)
-    await set_commands(bot=bot)
+    set_logging(config)
+    await set_commands(bot)
 
     dp.include_router(router)
 
