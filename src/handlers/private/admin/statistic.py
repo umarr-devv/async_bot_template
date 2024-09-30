@@ -2,16 +2,16 @@ from aiogram import types, Router, Bot
 from aiogram.filters.command import Command, CommandObject
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from src.service.crud import get_user_by_user_id
+from src.repositories import UserRepository
 
 router = Router()
 
 
 @router.message(Command(commands=['user']))
 async def on_user_info(message: types.Message,
-                           command: CommandObject,
-                           sessions: async_sessionmaker,
-                           bot: Bot):
+                       command: CommandObject,
+                       sessions: async_sessionmaker,
+                       bot: Bot):
     user_id = command.args
     if not user_id:
         text = '❌ Введите <b>ID</b> пользователя после команды <code>/user</code>'
@@ -24,7 +24,7 @@ async def on_user_info(message: types.Message,
         return
 
     user_id = int(user_id)
-    user = await get_user_by_user_id(sessions, user_id)
+    user = await UserRepository.by_user_id(sessions, user_id)
 
     if not user:
         text = f'❓ Пользователь с <b>ID</b> <code>{user_id}</code> не найден'
