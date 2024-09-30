@@ -1,3 +1,5 @@
+# migrations
+migrations/versions/*
 .fleet
 */local-config.yml
 */docker-config.yml
