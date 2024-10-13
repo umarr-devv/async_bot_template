@@ -1,8 +1,5 @@
 # logs
-logs
-
-# migrations
-migrations/versions/*
+.log*
 
 # IDE
 .fleet
