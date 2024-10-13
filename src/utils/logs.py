@@ -17,8 +17,8 @@ def set_logging(config: Config):
             StreamHandler(),
             TimedRotatingFileHandler(
                 filename=LOG_DIR + LOG_FILENAME,
-                when='S',
-                interval=20,
+                when='D',
+                interval=28,
                 encoding='utf-8'
             )
         ]
