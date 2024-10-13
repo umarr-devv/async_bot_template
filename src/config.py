@@ -1,9 +1,9 @@
-from os.path import dirname
+import os
 
 from pydantic import BaseModel
 from yaml import safe_load
 
-CONFIG_DIR = dirname(dirname(__file__)) + '/configs'
+CONFIG_DIR = os.getcwd() + '/configs'
 
 
 class BotConfig(BaseModel):
