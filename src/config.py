@@ -17,6 +17,11 @@ class DBConfig(BaseModel):
     user: str
     password: str
 
+    @property
+    def url(self) -> str:
+        return f'postgresql+asyncpg://{self.user}:{self.password}' \
+               f'@{self.host}/{self.database}'
+
 
 class RedisConfig(BaseModel):
     host: str
