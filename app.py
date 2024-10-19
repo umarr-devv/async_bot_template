@@ -3,7 +3,7 @@ import asyncio
 from aiogram import Dispatcher, Bot
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.storage.redis import RedisStorage
 
 from src.config import Config
 from src.handlers import router
@@ -15,7 +15,7 @@ from src.models import Base
 CONFIG_FILE = 'local-config.yml'
 
 config = Config.create(config_file=CONFIG_FILE)
-dp = Dispatcher(storage=MemoryStorage())
+dp = Dispatcher(storage=RedisStorage.from_url(config.redis.url))
 database = DataBase(config)
 bot = Bot(token=config.bot.token,
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))
