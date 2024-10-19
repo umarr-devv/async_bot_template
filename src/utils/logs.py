@@ -6,7 +6,8 @@ from src.config import Config
 
 LOG_FORMAT = '%(name)s | %(asctime)s | %(funcName)s | %(filename)s | %(levelname)s | %(message)s'
 LOG_FILENAME = '.log'
-LOG_DIR = os.getcwd() + '/logs/'
+LOG_DIR = os.getcwd() + '/logs'
+LOG_INTERVAl = 7
 
 
 def set_logging(config: Config):
@@ -16,9 +17,9 @@ def set_logging(config: Config):
         handlers=[
             StreamHandler(),
             TimedRotatingFileHandler(
-                filename=LOG_DIR + LOG_FILENAME,
+                filename=LOG_DIR + '/' + LOG_FILENAME,
                 when='D',
-                interval=28,
+                interval=LOG_INTERVAl,
                 encoding='utf-8'
             )
         ]
