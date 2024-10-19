@@ -18,6 +18,15 @@ class DBConfig(BaseModel):
     password: str
 
 
+class RedisConfig(BaseModel):
+    host: str
+    port: int
+
+    @property
+    def url(self) -> str:
+        return f'redis://{self.host}:{self.port}'
+
+
 class LoggingConfig(BaseModel):
     level: str
 
@@ -25,6 +34,7 @@ class LoggingConfig(BaseModel):
 class Config(BaseModel):
     bot: BotConfig
     db: DBConfig
+    redis: RedisConfig
     logging: LoggingConfig
 
     @classmethod
@@ -34,5 +44,6 @@ class Config(BaseModel):
         return Config(
             bot=BotConfig(**data['bot']),
             db=DBConfig(**data['db']),
+            redis=RedisConfig(**data['redis']),
             logging=LoggingConfig(**data['logging'])
         )
