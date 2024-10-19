@@ -2,9 +2,12 @@ bot:
     token: ''
     admin_id: 0
 db:
-    database: ''
-    host: ''
-    user: ''
+    database: 'postgres'
+    host: 'localhost'
+    user: 'postgres'
     password: ''
+redis:
+    host: 'localhost'
+    port: 6379
 logging:
     level: 'INFO'
