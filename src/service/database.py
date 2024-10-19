@@ -1,9 +1,7 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
 from src.config import Config
-
-URL_TEMPLATE = 'postgresql+asyncpg://{}:{}@{}/{}'
 
 
 class Base(DeclarativeBase):
@@ -13,10 +11,8 @@ class Base(DeclarativeBase):
 class DataBase:
 
     def __init__(self, config: Config):
-        self.url = URL_TEMPLATE.format(config.db.user, config.db.password,
-                                       config.db.host, config.db.database)
         self.engine = create_async_engine(
-            url=self.url
+            url=config.db.url
         )
         self.sessions = async_sessionmaker(
             bind=self.engine,
