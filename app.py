@@ -1,9 +1,11 @@
 import asyncio
 
+import pytz
 from aiogram import Dispatcher, Bot
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.redis import RedisStorage
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from src.config import Config
 from src.handlers import router
@@ -19,6 +21,7 @@ dp = Dispatcher(storage=RedisStorage.from_url(config.redis.url))
 database = DataBase(config)
 bot = Bot(token=config.bot.token,
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+scheduler = AsyncIOScheduler(timezone=pytz.timezone('UTC'))
 
 
 async def main():
@@ -28,7 +31,9 @@ async def main():
     dp.include_router(router)
 
     try:
-        await dp.start_polling(bot, sessions=database.sessions, config=config)
+        scheduler.start()
+        await dp.start_polling(bot, config=config,
+                               sessions=database.sessions, scheduler=scheduler)
     finally:
         await bot.session.close()
         await dp.storage.close()
