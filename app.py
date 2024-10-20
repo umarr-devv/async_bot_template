@@ -29,9 +29,8 @@ async def main():
     await set_commands(bot)
 
     dp.include_router(router)
-
+    scheduler.start()
     try:
-        scheduler.start()
         await dp.start_polling(bot, config=config,
                                sessions=database.sessions, scheduler=scheduler)
     finally:
