@@ -5,6 +5,7 @@ from aiogram import Dispatcher, Bot
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.redis import RedisStorage
+from apscheduler.jobstores.redis import RedisJobStore
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from src.config import Config
@@ -21,7 +22,15 @@ dp = Dispatcher(storage=RedisStorage.from_url(config.redis.url))
 database = DataBase(config)
 bot = Bot(token=config.bot.token,
           default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-scheduler = AsyncIOScheduler(timezone=pytz.timezone('UTC'))
+scheduler = AsyncIOScheduler(
+    timezone=pytz.timezone('UTC'),
+    jobstore={
+        'default': RedisJobStore(
+            host=config.redis.host,
+            port=config.redis.port
+        )
+    }
+)
 
 
 async def main():
