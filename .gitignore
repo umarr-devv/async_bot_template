@@ -8,6 +8,9 @@
 */local-config.yml
 */docker-config.yml
 
+# migrations
+migrations/versions/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
