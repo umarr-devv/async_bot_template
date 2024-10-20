@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import (Date, Integer)
+from sqlalchemy import (Integer, DateTime)
 from sqlalchemy.orm import mapped_column, Mapped
 
 from src.service.database import Base
@@ -12,6 +12,6 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(Integer, unique=True, nullable=False)
-    created_on: Mapped[datetime] = mapped_column(Date, default=current_utc_time)
-    updated_on: Mapped[datetime] = mapped_column(Date, default=current_utc_time,
+    created_on: Mapped[datetime] = mapped_column(DateTime, default=current_utc_time)
+    updated_on: Mapped[datetime] = mapped_column(DateTime, default=current_utc_time,
                                                  onupdate=current_utc_time)
